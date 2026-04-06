@@ -58,15 +58,24 @@
 
 ## 字体加载模式
 
-这个 preset 保留两种字体加载模式：
+这个 preset 默认推荐更简单的 `simple-web` 字体模式：
+
+- 主文字层：sans
+- 少量强调层：serif
+- 标签 / 页码 / 技术 token：mono
+
+它参考的是这种处理思路：[32kw 示例页面](https://www.32kw.com/view/bec2ff0)
+
+可选高级模式：
 
 - 国内友好 CDN 模式
-  - 面向中国大陆或不希望依赖 Google 域名时优先使用
+  - 明确需要使用特定中文 webfont 时启用
 - Google 模式
   - 面向海外用户，或明确需要 Google Fonts 时使用
 
 规则：
 
+- 默认先用 `simple-web`
 - Google 模式必须保留，不要删掉
 - 具体使用哪种模式，按受众与部署环境决定
 

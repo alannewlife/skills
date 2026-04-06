@@ -1,6 +1,6 @@
 # Skills
 
-这里存放的是我整理和制作的一些 Codex Skills。
+这里存放的是我整理和制作的一些 Skills。
 
 ## 当前 Skill 列表
 

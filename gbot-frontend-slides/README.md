@@ -1,10 +1,10 @@
 # Gbot Frontend Slides
 
-`gbot-frontend-slides` 是一套用于生成 HTML 演示文稿的 Claude Code skill。它既支持从零创建 deck，也支持把 `.pptx` 转成网页幻灯片。
+`gbot-frontend-slides` 是一套用于生成 HTML 演示文稿的 skill。它既支持从零创建 deck，也支持把 `.pptx` 转成网页幻灯片。
 
 这份 `README.md` 面向人类使用者和维护者；运行时真正驱动 agent 行为的是 [SKILL.md](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/SKILL.md)。
 
-参考自：[zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides)
+项目源代码参考自：[zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides)
 
 ## 文档分工
 
@@ -35,7 +35,7 @@
 - 视觉先行：通过生成预览帮助用户选风格，而不是先抽象描述
 - 避免 AI 套路感：强调定制感和清晰视觉方向
 - 生产可用：可部署、可导出、代码结构清楚
-- 双字体模式：同时保留国内友好 CDN 模式和 Google 模式
+- 默认简单字体模式：正文 sans、强调 serif、标签 mono；同时保留 CDN 和 Google 作为可选高级模式
 
 ## 使用方式
 
@@ -95,34 +95,51 @@
 - 先说明使用 `card-based` preset
 - 再说明主题，如 `dark-console` 或 `light-gray`
 - 如果有页面明细文档，直接把文档路径一起给出
-- 如果有字体要求，也一并说明使用国内友好 CDN 模式还是 Google 模式
+- 如果有字体要求，也一并说明使用 `simple-web`、国内友好 CDN 或 Google 模式
 
 一个完整示例：
 
 ```text
 /gbot-frontend-slides
 
-用 card-based preset，dark-console 主题，国内友好 CDN 字体模式，读取 /path/to/page-spec.md，生成单文件 HTML PPT，不参考现有成品
+用 card-based preset，dark-console 主题，simple-web 字体模式，读取 /path/to/page-spec.md，生成单文件 HTML PPT，不参考现有成品
 ```
 
 ## 字体加载模式
 
-这套 skill 保留两种字体加载模式，不会只保留其中一种。
+这套 skill 默认使用更简单的字体处理方式，并保留 hosted font 作为可选模式。
 
-### 模式 A：国内友好 CDN
+参考方向：
+
+- [32kw 示例页面](https://www.32kw.com/view/bec2ff0)
+- 它的处理思路很简单：
+  - 主文字层：一套 sans
+  - 少量强调层：一套 serif
+  - 标签 / 元信息：一套 mono
+  - 不把正文、标题、标签拆成很多外部字体来源
+
+### 模式 A：`simple-web`，默认推荐
+
+适合：
+
+- 需要最稳妥、最省心的网页字体策略
+- 希望本地预览、静态托管、截图、PDF 导出都尽量一致
+- 不想把问题复杂化到外部字体加载
+
+推荐做法：
+
+- 主文字层：`Inter, system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif`
+- 强调 serif 层：`"Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif`
+- mono 层：`ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`
+
+### 模式 B：国内友好 CDN
 
 适合：
 
 - 面向中国大陆观众
-- 部署环境在国内
-- 不希望依赖 Google 字体域名
+- 明确想使用字图这类 CDN 提供的具体中文字体
 
-当前推荐做法：
-
-- 中文正文 / 标题层优先使用字图 CDN
-- mono / 技术标签层也优先使用字图 CDN
-
-### 模式 B：Google
+### 模式 C：Google
 
 适合：
 
@@ -132,6 +149,7 @@
 
 规则：
 
+- 默认先用 `simple-web`
 - Google 模式必须保留在 skill 里，不能被删掉
 - 具体使用哪种模式，应按受众与部署环境决定
 

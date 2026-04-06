@@ -12,18 +12,6 @@ Reference architecture for generating slide presentations. Every presentation fo
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presentation Title</title>
 
-    <!-- Fonts: mode A = China-friendly CDN -->
-    <link rel="preconnect" href="https://chinese-fonts-cdn.deno.dev">
-    <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/lxgwmanhei/dist/LXGWMarkerGothic/result.css">
-    <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/maple-mono-cn/dist/MapleMono-CN-Regular/result.css">
-
-    <!-- Fonts: mode B = Google
-         Keep this mode available for users who explicitly need Google Fonts
-         or whose viewers are primarily outside mainland China. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
-
     <style>
         /* ===========================================
            CSS CUSTOM PROPERTIES (THEME)
@@ -39,8 +27,10 @@ Reference architecture for generating slide presentations. Every presentation fo
             --accent-glow: rgba(0, 255, 204, 0.3);
 
             /* Typography — MUST use clamp() */
-            --font-display: 'Clash Display', 'LXGW Marker Gothic', 'Noto Sans SC', sans-serif;
-            --font-body: 'Satoshi', 'LXGW Marker Gothic', 'Noto Sans SC', sans-serif;
+            --font-display: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            --font-body: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            --font-serif: "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif;
+            --font-mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
             --title-size: clamp(2rem, 6vw, 5rem);
             --subtitle-size: clamp(0.875rem, 2vw, 1.25rem);
             --body-size: clamp(0.75rem, 1.2vw, 1rem);
@@ -155,13 +145,29 @@ Reference architecture for generating slide presentations. Every presentation fo
 
 Choose the font-loading mode intentionally for each deck.
 
-### Mode A: China-friendly CDN
+### Mode A: `simple-web` (default)
 
 Use when:
 
-- the audience is in mainland China
-- network reliability to Google domains is uncertain
-- the user asks for a domestic-friendly deployment path
+- you want the most stable result across local preview, static hosting, screenshot capture, and PDF export
+- you want a simpler handling strategy similar to [this 32kw page](https://www.32kw.com/view/bec2ff0)
+- you do not need a specific hosted font family
+
+Typical pattern:
+
+```css
+--font-display: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+--font-body: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+--font-serif: "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif;
+--font-mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+```
+
+### Mode B: China-friendly CDN
+
+Use when:
+
+- the user explicitly wants a hosted Chinese font stack
+- the preset depends on a specific CDN-hosted Chinese or mono font
 
 Typical pattern:
 
@@ -171,7 +177,7 @@ Typical pattern:
 <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/maple-mono-cn/dist/MapleMono-CN-Regular/result.css">
 ```
 
-### Mode B: Google
+### Mode C: Google
 
 Use when:
 
@@ -189,7 +195,9 @@ Typical pattern:
 
 Rule:
 
-- keep both modes available in the skill
+- default to `simple-web`
+- keep all three modes available in the skill
+- do not mix multiple hosted font sources by default
 - do not delete Google mode from the documentation
 - choose the mode based on deployment context, not habit alone
 

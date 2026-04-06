@@ -4,29 +4,25 @@ Use these values as the structural token contract for the preset. Keep layout, t
 
 ## Fonts
 
-- Display / Body: `LXGW Marker Gothic` preferred for China-friendly CDN loading, `Noto Sans SC` fallback
-- Mono / Technical labels: `Maple Mono CN` preferred, `IBM Plex Mono` fallback
-
-```html
-<link rel="preconnect" href="https://chinese-fonts-cdn.deno.dev">
-<link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/lxgwmanhei/dist/LXGWMarkerGothic/result.css">
-<link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/maple-mono-cn/dist/MapleMono-CN-Regular/result.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-```
+- Default simple-web mode, inspired by [32kw 示例页面](https://www.32kw.com/view/bec2ff0):
+  - Display / Body: `Inter, system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif`
+  - Serif accent only when needed: `"Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif`
+  - Mono / Technical labels: `ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace`
+- Advanced hosted modes:
+  - China-friendly CDN: `LXGW Marker Gothic` + `Maple Mono CN`
+  - Google: `Noto Sans SC` + `IBM Plex Mono`
 
 Recommended loading strategy for this preset:
 
-- default to the China-friendly CDN block for China-facing or China-hosted decks
-- keep the Google Fonts block available as a first-class alternative mode
-- do not remove the Google mode from the preset; switch between the two based on audience and deployment context
+- default to `simple-web`
+- switch to China-friendly CDN or Google only when the user explicitly wants hosted font families
+- do not remove the Google mode from the preset
 - use CSS stacks like:
 
 ```css
-font-family: "Maple Mono CN", "IBM Plex Mono", monospace;
-font-family: "LXGW Marker Gothic", "Noto Sans SC", sans-serif;
+font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+font-family: "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", serif;
+font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 ```
 
 ## Core Tokens
