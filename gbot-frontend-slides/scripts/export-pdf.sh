@@ -225,11 +225,11 @@ const screenshotPaths = [];
 
 for (let i = 0; i < slideCount; i++) {
   // Navigate to slide by simulating the presentation's navigation
-  // Most frontend-slides presentations use a currentSlide index and show/hide
+  // Most gbot-frontend-slides presentations use a currentSlide index and show/hide
   await page.evaluate((index) => {
     const slides = document.querySelectorAll('.slide');
 
-    // Try multiple navigation strategies used by frontend-slides:
+    // Try multiple navigation strategies used by gbot-frontend-slides:
 
     // Strategy 1: Direct slide manipulation (most common in generated decks)
     slides.forEach((slide, idx) => {

@@ -1,13 +1,15 @@
-# Frontend Slides
+# Gbot Frontend Slides
 
-`frontend-slides` 是一套用于生成 HTML 演示文稿的 Claude Code skill。它既支持从零创建 deck，也支持把 `.pptx` 转成网页幻灯片。
+`gbot-frontend-slides` 是一套用于生成 HTML 演示文稿的 Claude Code skill。它既支持从零创建 deck，也支持把 `.pptx` 转成网页幻灯片。
 
-这份 `README.md` 面向人类使用者和维护者；运行时真正驱动 agent 行为的是 [SKILL.md](/Users/alan/work/SKILLS/.agents/skills/frontend-slides/SKILL.md)。
+这份 `README.md` 面向人类使用者和维护者；运行时真正驱动 agent 行为的是 [SKILL.md](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/SKILL.md)。
+
+参考自：[zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides)
 
 ## 文档分工
 
-- [SKILL.md](/Users/alan/work/SKILLS/.agents/skills/frontend-slides/SKILL.md)：执行协议。定义工作流、阶段、硬规则、何时读取哪些 supporting files。
-- [README.md](/Users/alan/work/SKILLS/.agents/skills/frontend-slides/README.md)：人类说明。说明这套 skill 是什么、怎么安装、怎么用、包含什么文件、适合什么场景。
+- [SKILL.md](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/SKILL.md)：执行协议。定义工作流、阶段、硬规则、何时读取哪些 supporting files。
+- [README.md](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/README.md)：人类说明。说明这套 skill 是什么、怎么安装、怎么用、包含什么文件、适合什么场景。
 
 一句话：
 
@@ -40,7 +42,7 @@
 ### 1. 新建一份演示文稿
 
 ```text
-/frontend-slides
+/gbot-frontend-slides
 
 我想做一个 AI 产品介绍 deck
 ```
@@ -56,7 +58,7 @@
 ### 2. 转换 PowerPoint
 
 ```text
-/frontend-slides
+/gbot-frontend-slides
 
 把 presentation.pptx 转成网页幻灯片
 ```
@@ -75,7 +77,7 @@
 例如：
 
 ```text
-/frontend-slides
+/gbot-frontend-slides
 
 用 card-based preset，dark-console 主题，基于页面明细生成 HTML PPT
 ```
@@ -83,7 +85,7 @@
 再比如：
 
 ```text
-/frontend-slides
+/gbot-frontend-slides
 
 用 card-based preset，light-gray 主题，读取这份页面说明文档生成单文件 HTML
 ```
@@ -98,7 +100,7 @@
 一个完整示例：
 
 ```text
-/frontend-slides
+/gbot-frontend-slides
 
 用 card-based preset，dark-console 主题，国内友好 CDN 字体模式，读取 /path/to/page-spec.md，生成单文件 HTML PPT，不参考现有成品
 ```
@@ -137,15 +139,15 @@
 
 | 文件 | 作用 | 什么时候读 |
 | --- | --- | --- |
-| [SKILL.md](/Users/alan/work/SKILLS/.agents/skills/frontend-slides/SKILL.md) | 主工作流和硬规则 | 调用 skill 时 |
-| [STYLE_PRESETS.md](/Users/alan/work/SKILLS/.agents/skills/frontend-slides/STYLE_PRESETS.md) | 通用风格预设清单 | 风格选择阶段 |
-| [viewport-base.css](/Users/alan/work/SKILLS/.agents/skills/frontend-slides/viewport-base.css) | 视口适配硬约束 | 生成阶段 |
-| [html-template.md](/Users/alan/work/SKILLS/.agents/skills/frontend-slides/html-template.md) | HTML 结构和 JS 骨架 | 生成阶段 |
-| [animation-patterns.md](/Users/alan/work/SKILLS/.agents/skills/frontend-slides/animation-patterns.md) | 动效参考库 | 生成阶段 |
-| [presets/](/Users/alan/work/SKILLS/.agents/skills/frontend-slides/presets) | 固定 house preset 定义 | 选定 preset 时 |
-| [scripts/extract-pptx.py](/Users/alan/work/SKILLS/.agents/skills/frontend-slides/scripts/extract-pptx.py) | 提取 PPT 内容 | PPT 转换时 |
-| [scripts/deploy.sh](/Users/alan/work/SKILLS/.agents/skills/frontend-slides/scripts/deploy.sh) | 部署到 URL | 分享阶段 |
-| [scripts/export-pdf.sh](/Users/alan/work/SKILLS/.agents/skills/frontend-slides/scripts/export-pdf.sh) | 导出 PDF | 分享阶段 |
+| [SKILL.md](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/SKILL.md) | 主工作流和硬规则 | 调用 skill 时 |
+| [STYLE_PRESETS.md](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/STYLE_PRESETS.md) | 通用风格预设清单 | 风格选择阶段 |
+| [viewport-base.css](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/viewport-base.css) | 视口适配硬约束 | 生成阶段 |
+| [html-template.md](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/html-template.md) | HTML 结构和 JS 骨架 | 生成阶段 |
+| [animation-patterns.md](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/animation-patterns.md) | 动效参考库 | 生成阶段 |
+| [presets/](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/presets) | 固定 house preset 定义 | 选定 preset 时 |
+| [scripts/extract-pptx.py](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/scripts/extract-pptx.py) | 提取 PPT 内容 | PPT 转换时 |
+| [scripts/deploy.sh](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/scripts/deploy.sh) | 部署到 URL | 分享阶段 |
+| [scripts/export-pdf.sh](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/scripts/export-pdf.sh) | 导出 PDF | 分享阶段 |
 
 ## Fixed House Preset
 
@@ -165,17 +167,11 @@
 如果你要把它装到 Claude Code 的 skill 目录：
 
 ```bash
-mkdir -p ~/.claude/skills/frontend-slides/scripts
+mkdir -p ~/.claude/skills/gbot-frontend-slides/scripts
 
-cp SKILL.md STYLE_PRESETS.md viewport-base.css html-template.md animation-patterns.md ~/.claude/skills/frontend-slides/
-cp scripts/extract-pptx.py ~/.claude/skills/frontend-slides/scripts/
-cp -R presets ~/.claude/skills/frontend-slides/
-```
-
-或者直接克隆：
-
-```bash
-git clone https://github.com/zarazhangrui/frontend-slides.git ~/.claude/skills/frontend-slides
+cp SKILL.md STYLE_PRESETS.md viewport-base.css html-template.md animation-patterns.md ~/.claude/skills/gbot-frontend-slides/
+cp scripts/extract-pptx.py ~/.claude/skills/gbot-frontend-slides/scripts/
+cp -R presets ~/.claude/skills/gbot-frontend-slides/
 ```
 
 ## 交付与分享
@@ -219,9 +215,9 @@ bash scripts/export-pdf.sh ./presentation.html ./output.pdf
 
 - 流程变化优先改 `SKILL.md`
 - 面向人的解释优先改 `README.md`
-- 结构骨架改 [html-template.md](/Users/alan/work/SKILLS/.agents/skills/frontend-slides/html-template.md)
-- 视口安全约束改 [viewport-base.css](/Users/alan/work/SKILLS/.agents/skills/frontend-slides/viewport-base.css)
-- 动效语言改 [animation-patterns.md](/Users/alan/work/SKILLS/.agents/skills/frontend-slides/animation-patterns.md)
+- 结构骨架改 [html-template.md](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/html-template.md)
+- 视口安全约束改 [viewport-base.css](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/viewport-base.css)
+- 动效语言改 [animation-patterns.md](/Users/alan/work/SKILLS/.agents/skills/gbot-frontend-slides/animation-patterns.md)
 - 固定 preset 的视觉语言改 `presets/` 下对应文件
 
 ## License
