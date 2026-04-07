@@ -29,7 +29,7 @@
 得到类似：
 
 ```text
-/Users/alan/work/SKILLS/Citrini_Hormuz_PPT页面明细.md
+/Users/alan/work/SKILLS/SKILLS技术介绍与拆解_PPT页面明细.md
 ```
 
 然后继续：
@@ -37,7 +37,7 @@
 ```text
 /gbot-frontend-slides
 
-用 card-based preset，light-gray 主题，读取 /Users/alan/work/SKILLS/Citrini_Hormuz_PPT页面明细.md，生成单文件 HTML PPT，不参考现有任何既有结果 PPT。
+用 card-based preset，light-gray 主题，读取 /Users/alan/work/SKILLS/SKILLS技术介绍与拆解_PPT页面明细.md，生成。
 ```
 
 ## 效果（两种色调主题）
