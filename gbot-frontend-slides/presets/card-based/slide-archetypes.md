@@ -17,6 +17,7 @@ Use for opening page only.
 - yellow second-line title
 - subtitle line below
 - three small horizontal intro statements
+- do not render the upper-left page anchor on the cover
 
 ## 2. Definition Grid
 
@@ -39,6 +40,31 @@ Use for principle or mechanism explanation.
 - cards should read like a chain, not isolated notes
 - keep the card heads aligned to a common upper baseline
 - each card should include a semantic icon that helps distinguish the mechanism role
+
+Layout variants:
+
+- `3-column regular`
+  - use when cards contain medium or long copy
+  - the audience should compare the three cards side by side
+  - card content anchors from the top
+- `3-column centered`
+  - use when cards contain short copy, but the page should still read as a left-to-right comparison
+  - treat the three cards as one centered comparison cluster below the title block
+  - card height can increase, but the primary goal is stable central composition rather than mechanically filling all remaining height
+  - inside each card, title and short copy can sit around the visual middle rather than hugging the top edge
+  - use this when the default three-column row feels too empty, but switching to a vertical stack would weaken the comparison
+- `3-row stacked`
+  - use when each card contains a short concept + one short support sentence and the page should read as a sequence of three structured lines
+  - cards stack vertically and each card expands horizontally
+  - left side = icon + concept title
+  - right side = support sentence and optional token row
+  - this variant is for ordered reading, not for strong side-by-side comparison
+
+Decision rule:
+
+- if horizontal comparison is the page's main job, choose one of the two `3-column` variants
+- if the cards are sparse and the lower half of the slide looks empty, prefer `3-column centered` before considering `3-row stacked`
+- only choose `3-row stacked` when the page can afford to trade comparison strength for stronger sequential reading
 
 ## 4. Structure Split
 
@@ -98,6 +124,26 @@ Use for concluding comparison or boundary pages.
 - top row should begin high in the content band instead of floating downward
 - each card should include a semantic icon in the header row, using consistent badge treatment
 
+Layout guidance:
+
+- this archetype may use either `center-stage` or `fill-band`, but should decide explicitly
+- prefer `center-stage` when the page is still mainly a narrative conclusion and the matrix is acting as a compact summary cluster
+- use `fill-band` when the page is mainly a comparison surface and the matrix should dominate the whole content zone
+- do not let the four cards collapse to awkward content-fit height with accidental empty space below; either compose them as a centered cluster or stretch them deliberately
+
+`fill-band` means:
+
+- the grid itself stretches to the available content height
+- each card stretches with the grid row
+- extra vertical budget is absorbed by card height first, not by empty space under the grid
+- card copy may still align from the top; “occupy more height” does not require vertical centering by default
+
+`center-stage` means:
+
+- the `2 x 2` grid is treated as one bounded summary block
+- the whole block sits in the visual middle of the content zone
+- surrounding whitespace supports the composition instead of looking like leftover area
+
 ## Mapping From Page Types
 
 Recommended mapping from page-detail template to preset archetypes:
@@ -138,7 +184,10 @@ Use these as structural samples when generating. They are not mandatory copy, bu
 Expected rendering:
 
 - one wide title block
-- three equal cards
+- one of three variants:
+  - regular three-column
+  - centered three-column for sparse copy
+  - compact three-row stacked for sequential reading
 - each card contains one concept plus one short explanation cluster
 
 ### Sample B: Five-Step Flow

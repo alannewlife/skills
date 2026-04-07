@@ -71,6 +71,20 @@ At file level, include a short schema section that only states:
 - if a page is overloaded, split it into more pages in the page-detail output
 - if source content is sparse, still emit the required page fields and keep them concise
 
+## Ending Page Rule
+
+- default to adding one final ending page
+- do not skip the ending page unless:
+  - the user explicitly says not to include one, or
+  - the source material already clearly includes a closing / ending page
+- the ending page is a closing page, not a new argument page:
+  - it should close the deck, not introduce fresh evidence
+  - it may use a short recap, closing statement, thank-you line, or next-step handoff, depending on the source material
+- the ending page must still use the normal page-detail schema:
+  - `### 页面内容与信息`
+  - `### 页面风格与呈现`
+- when the source material has no explicit closing text, write the ending page in a restrained way that matches the deck tone instead of inventing a large new section
+
 ## Workflow
 
 1. Read the source material and identify the natural page sequence.
@@ -86,7 +100,8 @@ At file level, include a short schema section that only states:
    - 视觉重点
    - 动效建议
    - 布局强化说明
-5. Do a final pass to ensure every page has the minimum schema.
+5. Ensure the deck has one explicit ending page unless the user or source already excludes the need for it.
+6. Do a final pass to ensure every page has the minimum schema.
 
 ## Output Template
 
@@ -127,6 +142,37 @@ At file level, include a short schema section that only states:
 
 **页面类型**
 ...
+
+**版式建议**
+...
+
+**视觉重点**
+...
+
+**动效建议**
+...
+
+**布局强化说明**
+- ...
+
+## Pn｜结束页
+
+### 页面内容与信息
+
+**标题**
+...
+
+**副标题**
+...
+
+**页面要点**
+- ...
+  - ...
+
+### 页面风格与呈现
+
+**页面类型**
+结束页
 
 **版式建议**
 ...

@@ -69,12 +69,13 @@ Use this variant when the user wants the same stage model and card system but wi
     --text-muted: #94a3b8;
     --line-soft: rgba(59, 130, 246, 0.12);
     --line-strong: rgba(30, 64, 175, 0.22);
+    --line-hover-gold: rgba(245, 158, 11, 0.44);
     --accent-blue: #3b82f6;
     --accent-cyan: #0ea5e9;
     --accent-yellow: #f59e0b;
     --accent-magenta: #ec4899;
     --accent-green: #10b981;
-    --shadow-deep: 0 1.5rem 4rem rgba(15, 23, 42, 0.12);
+    --shadow-deep: 0 0 0 rgba(15, 23, 42, 0);
     --shadow-glow: 0 0 2rem rgba(59, 130, 246, 0.12);
 }
 ```

@@ -68,6 +68,7 @@ if (!fitsStage) {
 - Lower-right page number stays quiet and detached from card content
 - Deck chrome positions are fixed across the whole deck; do not let per-page layouts redefine them
 - Do not show bottom-left keyboard legend in this preset
+- The cover slide is the exception for the upper-left page anchor: keep page number and nav, but omit the anchor label entirely
 - Chrome colors must follow the active theme tokens:
   - dark themes use light page numbers over dark stages
   - light themes switch page numbers, labels, and hover text to dark slate values
@@ -138,6 +139,7 @@ Frame rule:
 - left-top anchor, right-bottom page number, and right-side controls are fixed chrome
 - the content shell is an absolute inset box defined by frame variables
 - slide archetypes may change their internal layout, but must not redefine the page frame
+- the opening cover may drop the left-top anchor, but inner slides should keep it
 
 ## Background Language
 
@@ -159,6 +161,42 @@ For inner slides:
 - title and subtitle should use a wide upper-band measure; avoid premature wrapping when one line still fits comfortably
 - For medium-length titles, prefer a single line after widening the title measure; only allow two lines when the full upper band is genuinely exhausted
 - Reserve header-safe and footer-safe space before placing title, cards, or summary strips
+
+### Composition Gravity
+
+Treat the inner slide as a bounded composition with a real content zone, not as a document where components sit at their natural height.
+
+The first question is not “how do I fill the space?”, but:
+
+- should the main structure sit as a centered visual cluster?
+- or should it stretch across the content band?
+
+Allowed gravity modes:
+
+`center-stage`
+
+- preferred default for this preset
+- the main structure forms a stable centered block below the title
+- surrounding whitespace is intentional and supports the composition
+- use for mechanism pages, key-judgment pages, sparse card clusters, and narrative explanation pages
+
+`fill-band`
+
+- use when the page is fundamentally a matrix, process surface, or dense comparison structure
+- the main structure stretches across the remaining content band
+- unused height is absorbed by the structure itself rather than left below it
+
+Practical rule:
+
+- default to `center-stage`
+- switch to `fill-band` only when the page becomes stronger by behaving like a surface rather than a block
+
+This is a composition rule, not a “make everything huge” rule:
+
+- preserve the header hierarchy
+- preserve footer-safe space
+- keep internal spacing calm
+- but make the chosen gravity mode explicit instead of letting the layout drift into accidental emptiness
 
 ### Top Anchor Safe Area
 
@@ -258,6 +296,12 @@ Validation rule:
 
 - Theme-aware cards with subtle inner top highlight
 - Cyan-to-blue left accent rail as the default card rail
+- Three-card pages should not always default to a single horizontal row:
+  - if card copy is denser, keep the `3-column regular` row
+  - if card copy is sparse but the page still needs left-to-right comparison, use `3-column centered`
+  - if the page should read as three sequential structured lines, use `3-row stacked`
+  - do not treat `3-row stacked` as the default fix for empty space; prefer `3-column centered` first when comparison matters
+  - the compact stacked variant should keep the same card chrome, but move title/signifier to the left and explanatory copy to the right
 - The left accent rail is part of the preset's fixed visual language, not an optional decoration
 - Use a slightly wider rail than a generic 3-4px dashboard line so cards read more clearly at presentation distance
 - Recommended rail width for this preset: around `6px`
@@ -277,6 +321,50 @@ Validation rule:
 - Do not bottom-anchor card copy with `justify-content: space-between` unless a specific decorative element must stay at the bottom; primary card text always starts from the top
 - Card density should be chosen as part of the page plan, together with header height and bottom safe area, so the full card content fits inside the allocated content band from the start
 - In `light-gray`, keep the same card geometry and rail treatment, but switch card surfaces to white / near-white panels with slate text and lighter shadows
+- In `light-gray`, prefer border-led surfaces with transparent or near-transparent shadows; do not leave a visible gray drop-shadow block behind the cards
+
+### Card Hover
+
+Cards in this preset may use a subtle hover interaction, but it must stay restrained and presentation-grade.
+
+Behavior:
+
+- slight upward motion
+- slight scale increase
+- hover border switches to a gold edge in `light-gray`
+- do not use loud glow, spring bounce, or large perspective tilt in this preset
+
+Reference CSS:
+
+```css
+:root[data-theme="light-gray"] {
+  --line-hover-gold: rgba(245, 158, 11, 0.44);
+}
+
+.card-panel {
+  transition:
+    transform var(--duration-fast) var(--ease-out-expo),
+    border-color var(--duration-fast) ease,
+    background var(--duration-fast) ease;
+}
+
+/* Important: cards often already receive transform from reveal selectors.
+   Keep hover selector at least this specific so the hover transform wins. */
+.slide.visible .card-panel:hover {
+  transform: translateY(-7px) scale(1.006);
+  border-color: var(--line-hover-gold);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.97),
+    rgba(248, 251, 255, 0.94)
+  );
+}
+```
+
+Implementation note:
+
+- if the card is also targeted by `.slide.visible .reveal-stagger > *`, a plain `.card-panel:hover` rule may be overridden
+- use `.slide.visible .card-panel:hover`, or move hover transform to a wrapper layer, so hover motion is actually visible
 
 ### Dense Card Pages
 
@@ -287,6 +375,72 @@ For dense pages such as the four-card summary grid:
 - reduce card title size before shrinking body copy
 - reduce inner padding and inter-block gaps before reducing line-height
 - nested info blocks inside the card should also have a compact variant
+
+### Three-Card Page Budgeting
+
+Three-card pages need an explicit choice of reading mode before layout starts.
+
+`3-column regular`
+
+- use when each card has enough copy to justify a normal card height
+- anchor card content from the top
+- leave extra lower whitespace only if the title block is already very tall and the page still feels balanced
+
+`3-column centered`
+
+- use when the three cards are short, but horizontal comparison is still the page's main job
+- treat the row as a centered comparison cluster
+- increase card height only as needed; do not force a full-band stretch unless the page explicitly calls for it
+- card internals may shift toward vertical centering, but should still preserve clear title/body hierarchy
+
+`3-row stacked`
+
+- use when sequential reading is more important than lateral comparison
+- treat the page as three horizontal lanes rather than three side-by-side columns
+- use this for sparse copy that reads like three compact statements, steps, or structured lines
+- avoid this mode when the presenter is expected to compare differences across the three cards at a glance
+
+Practical selection rule:
+
+- ask first: “is this page about comparing three parallel ideas, or reading three compact lines in order?”
+- if the answer is comparison, use one of the `3-column` variants
+- if comparison remains important and the row still feels empty, switch from `3-column regular` to `3-column centered`
+- only switch to `3-row stacked` when ordered reading is the better communication mode
+
+### Four-Card Grid Budgeting
+
+Four-card summary pages should not default to accidental content-fit height. They should explicitly choose either `center-stage` or `fill-band`.
+
+`center-stage` mode:
+
+- reserve the header zone first
+- treat the `2 x 2` grid as a bounded summary block
+- place the whole block in the visual middle of the content zone
+- use when the page is still primarily narrative and the matrix acts as the summary payload
+
+`fill-band` mode:
+
+- reserve the header zone first
+- stretch the `2 x 2` grid to fill the remaining content zone
+- stretch each card to the row height
+- keep copy top-aligned unless the page specifically needs a centered statement treatment
+
+When to use:
+
+- the page is mainly a comparison / summary matrix
+- each card has short or medium copy
+- the default content-fit cards would leave a large empty area below the grid
+
+When not to use:
+
+- the title block is unusually tall and already consumes most of the page
+- one or more cards contain significantly longer copy that would make the stretched grid feel cramped
+- the page includes an additional summary strip that already occupies the lower band
+
+Preference rule:
+
+- if both work, prefer `center-stage`
+- switch to `fill-band` when the matrix should read as the page's dominant comparison surface, not just a centered summary block
 
 ### Structure Split Planning
 
