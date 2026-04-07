@@ -105,6 +105,12 @@
 用 card-based preset，dark-console 主题，simple-web 字体模式，读取 /path/to/page-spec.md，生成单文件 HTML PPT，不参考现有成品
 ```
 
+- 两种风格效果
+<img width="1200" height="681" alt="image" src="https://github.com/user-attachments/assets/5ac61752-2360-478e-9415-e81a44ecf6e5" />
+
+<img width="1200" height="689" alt="image" src="https://github.com/user-attachments/assets/228c4366-a2b2-4916-966b-d6ab4804aa33" />
+
+
 ### 4. 结合 `gbot-ppt-writer` 一起用
 
 这两个 skill 很适合串起来：
