@@ -39,3 +39,10 @@
 
 用 card-based preset，light-gray 主题，读取 /Users/alan/work/SKILLS/Citrini_Hormuz_PPT页面明细.md，生成单文件 HTML PPT，不参考现有任何既有结果 PPT。
 ```
+
+## 效果
+
+<video src="https://raw.githubusercontent.com/alannewlife/skills/main/showSample.mp4" controls muted playsinline width="960">
+  你的环境如果不支持内嵌视频播放，可以直接打开
+  <a href="https://github.com/alannewlife/skills/blob/main/showSample.mp4">showSample.mp4</a>
+</video>
