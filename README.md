@@ -40,6 +40,9 @@
 用 card-based preset，light-gray 主题，读取 /Users/alan/work/SKILLS/Citrini_Hormuz_PPT页面明细.md，生成单文件 HTML PPT，不参考现有任何既有结果 PPT。
 ```
 
-## 效果
+## 效果（两种色调主题）
 
-https://raw.githubusercontent.com/alannewlife/skills/refs/heads/main/showSample.mp4
+
+https://github.com/user-attachments/assets/8caf1d18-683d-44cd-8c7e-8e2d891b58e7
+
+
