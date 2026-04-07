@@ -42,4 +42,4 @@
 
 ## 效果
 
-./showSample.mp4
+https://raw.githubusercontent.com/alannewlife/skills/refs/heads/main/showSample.mp4
