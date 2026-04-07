@@ -105,6 +105,66 @@
 用 card-based preset，dark-console 主题，simple-web 字体模式，读取 /path/to/page-spec.md，生成单文件 HTML PPT，不参考现有成品
 ```
 
+### 4. 结合 `gbot-ppt-writer` 一起用
+
+这两个 skill 很适合串起来：
+
+- `gbot-ppt-writer` 负责把原始提纲、讲稿、笔记整理成标准 `页面明细.md`
+- `gbot-frontend-slides` 负责读取这份页面明细，渲染成 HTML PPT
+
+适合场景：
+
+- 你手里只有提纲、口播稿、研究笔记，还没有逐页 slide spec
+- 你希望先把内容结构定清楚，再进入视觉和 HTML 生成
+- 你想让“内容整理”和“页面渲染”分成两个稳定步骤
+
+推荐 workflow：
+
+1. 先用 `gbot-ppt-writer` 生成页面明细
+2. 再把生成的 `.md` 文件交给 `gbot-frontend-slides`
+
+第一步示例：
+
+```text
+/gbot-ppt-writer
+
+把这份研究提纲整理成一份标准的 PPT 页面明细 markdown。
+按 `## Pn｜页面名` 输出，每页都包含：
+- 页面内容与信息
+- 页面风格与呈现
+
+要求保留原始论点，不要写成营销文案。
+```
+
+预期产物通常会是类似这样的文件：
+
+```text
+/path/to/Citrini_Hormuz_PPT页面明细.md
+```
+
+第二步示例：
+
+```text
+/gbot-frontend-slides
+
+用 card-based preset，light-gray 主题，读取 /path/to/Citrini_Hormuz_PPT页面明细.md，生成单文件 HTML PPT，不参考现有任何既有结果 PPT。
+```
+
+如果你希望把这套串联写得更完整一点，可以直接这样下指令：
+
+```text
+先用 /gbot-ppt-writer 把这份提纲整理成标准的 `页面明细.md`，
+再用 /gbot-frontend-slides 基于该文档生成 HTML PPT。
+
+渲染时使用 card-based preset，light-gray 主题，输出单文件 HTML。
+```
+
+实践建议：
+
+- `gbot-ppt-writer` 的输出尽量保持“逐页、结构化、数据化”，不要在文档里混入太多渲染器说明
+- `gbot-frontend-slides` 阶段再决定 preset、主题、字体模式、是否导出 PDF
+- 如果 deck 后续会反复改，优先把 `页面明细.md` 作为单一内容源维护
+
 ## 字体加载模式
 
 这套 skill 默认使用更简单的字体处理方式，并保留 hosted font 作为可选模式。
