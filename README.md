@@ -42,7 +42,4 @@
 
 ## 效果
 
-<video src="https://raw.githubusercontent.com/alannewlife/skills/main/showSample.mp4" controls muted playsinline width="960">
-  你的环境如果不支持内嵌视频播放，可以直接打开
-  <a href="https://github.com/alannewlife/skills/blob/main/showSample.mp4">showSample.mp4</a>
-</video>
+https://raw.githubusercontent.com/alannewlife/skills/main/showSample.mp4
