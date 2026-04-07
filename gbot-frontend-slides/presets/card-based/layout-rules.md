@@ -66,10 +66,78 @@ if (!fitsStage) {
 - Right-side vertical navigation pills stay in viewport coordinates, not stage coordinates
 - Upper-left page anchor uses mono text and a short cyan line
 - Lower-right page number stays quiet and detached from card content
+- Deck chrome positions are fixed across the whole deck; do not let per-page layouts redefine them
 - Do not show bottom-left keyboard legend in this preset
 - Chrome colors must follow the active theme tokens:
   - dark themes use light page numbers over dark stages
   - light themes switch page numbers, labels, and hover text to dark slate values
+
+Recommended fixed positions for this preset:
+
+- upper-left page anchor:
+  - top inset: around `24px` to `32px`
+  - left inset: around `72px`
+- lower-right page number:
+  - right inset: around `56px` to `72px`
+  - bottom inset: around `20px` to `28px`
+
+### Fixed Page Frame
+
+Do not rely on content blocks to "remember" chrome avoidance. The page frame should be fixed in code first, then content should be rendered inside the remaining shell.
+
+Reference pattern for this preset:
+
+```css
+:root {
+  --frame-top: 40px;
+  --frame-right: 88px;
+  --frame-bottom: 40px;
+  --frame-left: 72px;
+  --anchor-safe-band: 60px;
+  --anchor-title-gap: 24px;
+  --footer-band-height: 116px;
+  --nav-right: 28px;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+}
+
+.slide-content {
+  position: absolute;
+  left: var(--frame-left);
+  right: var(--frame-right);
+  top: calc(var(--frame-top) + var(--anchor-safe-band) + var(--anchor-title-gap));
+  bottom: calc(var(--frame-bottom) + var(--footer-band-height));
+  min-height: 0;
+}
+
+.deck-anchor {
+  position: absolute;
+  top: 28px;
+  left: 72px;
+}
+
+.page-number {
+  position: absolute;
+  right: 60px;
+  bottom: 22px;
+}
+
+.nav-dots {
+  position: absolute;
+  right: var(--nav-right);
+  top: 50%;
+  transform: translateY(-50%);
+}
+```
+
+Frame rule:
+
+- left-top anchor, right-bottom page number, and right-side controls are fixed chrome
+- the content shell is an absolute inset box defined by frame variables
+- slide archetypes may change their internal layout, but must not redefine the page frame
 
 ## Background Language
 
@@ -90,6 +158,27 @@ For inner slides:
 - content region should align from the top of its band, not vertically center dense card layouts
 - title and subtitle should use a wide upper-band measure; avoid premature wrapping when one line still fits comfortably
 - For medium-length titles, prefer a single line after widening the title measure; only allow two lines when the full upper band is genuinely exhausted
+- Reserve header-safe and footer-safe space before placing title, cards, or summary strips
+
+### Top Anchor Safe Area
+
+The upper-left page anchor owns its own band. The title block must start below that band instead of sharing the same vertical lane.
+
+- treat the anchor as fixed deck chrome, not as part of the title block
+- the title block starts after the anchor-safe band, not directly after the slide shell top padding
+- do not rely on lucky line-height or smaller titles to avoid collisions
+
+Recommended minimums for this preset:
+
+- anchor-safe band height: `56px` to `64px`
+- additional gap between anchor-safe band and title block: `20px` to `28px`
+- effective title start below the slide top edge: around `96px` to `120px`
+
+Validation rule:
+
+- after layout, the page anchor and the top edge of the title block must remain visually separate
+- a large first-line title must not pass behind the anchor text or cyan line
+- if the title block becomes too tall, reduce title size or switch to two-line mode; do not collapse the anchor-safe band
 
 ### Page Title Fitting
 
@@ -134,20 +223,21 @@ Recommended content shell:
 - right padding: around `3.75rem`
 - title block max width: around `1500px`
 - subtitle max width: around `1400px`
-- reserve a bottom safe area for the page number when a footer strip / summary strip exists
+- reserve both a header-safe area for the page anchor and a bottom safe area for the page number
+- inner slide content should usually begin after the header-safe area, not immediately at the shell top padding
 
 ### Bottom Safe Area
 
 Bottom clearance must be treated as an explicit layout budget, not an afterthought.
 
-- the lower-right page number owns a reserved safe area
-- content blocks, summary strips, and bottom-row cards must not enter that area
+- the page number sits inside a reserved footer band
+- content blocks, summary strips, and bottom-row cards must not enter that footer band
+- the footer band includes visible breathing room above the page number, not just enough height to contain the glyphs
 - do not rely on visual luck or shadows; reserve real layout space
 
 Recommended minimums for this preset:
 
-- page number safe area height: `72px`
-- page number safe area width: `140px`
+- footer-safe band height: `104px` to `116px`
 - content bottom inset on inner slides: at least `96px`
 - for pages with summary strips or dense bottom rows, prefer `112px` to `128px`
 
@@ -156,11 +246,13 @@ Implementation rule:
 - the slide shell should include the safe area in its bottom padding, or
 - the content region should subtract the safe area from its available height, or
 - both, for dense pages such as the four-card summary grid
+- do not model the page number as a separate lower-right exclusion box unless a preset explicitly needs that behavior
 
 Validation rule:
 
 - after layout, the lowest visible content edge must remain clearly above the page number block
-- choose the bottom inset as part of the initial page budget so the bottom row remains comfortably above the page number block
+- the page number should read as sitting inside a calm footer band, with clear space above it
+- choose the footer band as part of the initial page budget so the lowest content row remains comfortably above it
 
 ## Card System
 
@@ -196,13 +288,24 @@ For dense pages such as the four-card summary grid:
 - reduce inner padding and inter-block gaps before reducing line-height
 - nested info blocks inside the card should also have a compact variant
 
+### Structure Split Planning
+
+`Structure Split` is an asymmetric archetype and should be planned that way from the start.
+
+- the left column is a concept stack; its cards are content-fit cards, not equal-height cards by default
+- the right column is the structural artifact; it may be visually larger, but its internal density must still fit the allocated content band
+- do not force the left column into equal rows when the three cards have different text volumes
+- when the right panel contains both a tree / code-like block and a second explanatory note row, plan the right panel with a tighter internal rhythm from the outset
+- if vertical pressure appears, first reduce the right-panel tree size, note-chip density, and internal gaps before stealing space from the left concept cards
+- the whole split layout should live inside the remaining content band as a flexible block, not as an unconstrained auto-growing block
+
 ### Page Budgeting
 
 Before rendering any dense inner slide, explicitly budget the stage into three zones:
 
 - header zone: page anchor, page title, subtitle
 - content zone: the main card grid or process structure
-- footer-safe zone: reserved empty space for page number and visual breathing room
+- footer-safe zone: a full-width footer band reserved for the page number and visual breathing room
 
 Planning rule:
 

@@ -112,6 +112,72 @@
    - 轻微位移 / scale / blur
    - 不做吵闹的大动效
 
+## 固定页眉与页脚
+
+这套模板的页眉和页脚不是“页面装饰”，而是固定 chrome 预算。
+
+规则：
+
+- 左上锚点和右下页码的位置在整套 deck 中保持一致
+- 新页面生成时，先为页眉和页脚预留安全区，再排标题、卡片和总结条
+- 不允许单页为了多塞一点内容而侵占页眉或页脚安全区
+
+对于 `card-based`：
+
+- 左上锚点使用固定 top / left inset
+- 右下页码使用固定 right / bottom inset
+- 右侧控制条使用固定 right inset 和垂直居中定位
+- 内页标题块必须从锚点安全带之后开始
+- 内容区必须落在固定 content shell 内，而不是靠内容自己避让 chrome
+
+建议直接用代码固定页面框架：
+
+```css
+:root {
+  --frame-top: 40px;
+  --frame-right: 88px;
+  --frame-bottom: 40px;
+  --frame-left: 72px;
+  --anchor-safe-band: 60px;
+  --anchor-title-gap: 24px;
+  --footer-band-height: 116px;
+  --nav-right: 28px;
+}
+
+.slide-content {
+  position: absolute;
+  left: var(--frame-left);
+  right: var(--frame-right);
+  top: calc(var(--frame-top) + var(--anchor-safe-band) + var(--anchor-title-gap));
+  bottom: calc(var(--frame-bottom) + var(--footer-band-height));
+}
+
+.deck-anchor {
+  position: absolute;
+  top: 28px;
+  left: 72px;
+}
+
+.page-number {
+  position: absolute;
+  right: 60px;
+  bottom: 22px;
+}
+
+.nav-dots {
+  position: absolute;
+  right: var(--nav-right);
+  top: 50%;
+  transform: translateY(-50%);
+}
+```
+
+具体参数和验证规则统一写在：
+
+- [layout-rules.md](./layout-rules.md)
+
+这里的意思是：这套模板的页眉/页脚预算属于 preset 内部规则，不应散落在全局模板里。
+
 ## 需要一起阅读的文件
 
 使用这个 preset 生成时，还应读取这些文件：

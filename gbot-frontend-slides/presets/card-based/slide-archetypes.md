@@ -2,6 +2,12 @@
 
 These archetypes define the allowed page structures for the preset.
 
+All inner-slide archetypes inherit the same chrome budget:
+
+- reserve a fixed upper-left anchor band before the title block starts
+- reserve a fixed footer band for the page number outside the content zone
+- do not let page-specific layouts redefine header or footer chrome positions
+
 ## 1. Cover Slide
 
 Use for opening page only.
@@ -38,10 +44,13 @@ Use for principle or mechanism explanation.
 
 Use for system composition or directory explanation.
 
-- left side: short stacked concept cards
+- left side: short stacked concept cards with content-fit heights
 - right side: one larger structure card
 - right card may contain directory tree, code-like structure, or layered explanation
 - both the left stack and the right-side structural notes can use small header icons
+- this archetype is asymmetric by default: the right card is the main structural artifact, while the left cards remain readable concept summaries
+- when the right card contains both a structure block and a note row, tighten the right-panel internal rhythm from the outset instead of forcing the left cards into equal-height rows
+
 
 ## 5. Five-Step Flow
 
@@ -191,5 +200,5 @@ Expected rendering:
 - `2 x 2` value grid
 - top row for value / fit
 - bottom row for boundary / proof
-- reserve extra bottom safe area so the lower row never collides with the lower-right page number
+- reserve extra footer-safe space so the lower row never enters the page-number band
 - plan this archetype with compact-card density from the outset when the page title is long or each card contains two nested text blocks
