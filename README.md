@@ -45,5 +45,5 @@
 
 https://github.com/user-attachments/assets/8caf1d18-683d-44cd-8c7e-8e2d891b58e7
 
-- ![深色版](https://www.32kw.com/view/6879eb0)
-- ![浅色版](https://www.32kw.com/view/885e5a7)
+- [深色版](https://www.32kw.com/view/6879eb0)
+- [浅色版](https://www.32kw.com/view/885e5a7)
