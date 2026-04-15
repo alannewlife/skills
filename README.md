@@ -47,3 +47,18 @@ https://github.com/user-attachments/assets/8caf1d18-683d-44cd-8c7e-8e2d891b58e7
 
 - [深色版](https://www.32kw.com/view/6879eb0)
 - [浅色版](https://www.32kw.com/view/885e5a7)
+
+
+## 升级效果的提示词写法
+可以用提示词，对效果进行增强，增加图示内容。
+
+```text
+/gbot-frontend-slides
+
+用 card-based preset，light-gray 主题，读取 XXXXXXXXXXXXXXXXX.md，生成PPT，  
+请在需要的地方使用svg生成内容对应的流程图、架构图、结构图等插入相应的slide，每个slide不要堆砌文字，结构布局要合理，做到信达雅。
+```
+<img width="804" height="454" alt="image" src="https://github.com/user-attachments/assets/6b8ff6bc-0cc7-4f40-975a-c0b0f8c8cfc0" />
+
+- [图示版](https://rrzxs.com/slide-hermes/)
+
