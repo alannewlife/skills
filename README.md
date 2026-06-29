@@ -69,6 +69,18 @@
 打开 /Users/alan/work/xxx/article-folder 这个目录，里面有 index.md 和 assets 图片。
 ```
 
+
+## 执行效果示例
+https://github.com/user-attachments/assets/f9c703f2-01cf-4bae-a42e-923150113ec1
+
+
+<img width="1531" height="798" alt="image" src="https://github.com/user-attachments/assets/7cfc8413-0d0e-48eb-ba3a-28a976cacdfd" />
+
+示例中直接生成的公众号文章：
+https://mp.weixin.qq.com/s/iRuNFBrOzGNaIwvxdWMybQ
+
+---
+
 ## 组合 2：PPT 页面明细 + HTML 幻灯片
 
 `gbot-ppt-writer` 和 `gbot-frontend-slides` 是一组更偏 PPT 生产的组合，也可以单独使用。
