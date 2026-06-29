@@ -36,7 +36,7 @@
 常见流程是：
 
 1. 先用 `gbot-wechat-article` 写出公众号文章，并确认配图是直接画出来，还是只提供 Prompt。
-2. 如果选择直接画出来，默认用 Agnes Image 2.1 Flash 生成配图（参考 [gbot-wechat-article README](gbot-wechat-article/README.md)）。
+2. 如果选择直接画出来，默认用 Agnes Image 2.1 Flash 生成配图（参考 [gbot-wechat-article README](gbot-wechat-article/README.md)的API配置说明）。
 3. 把生成的 Markdown 文章交给 `gbot-markdown-poster` 打开，进行预览、排版和分享。
 
 也可以单独使用：
