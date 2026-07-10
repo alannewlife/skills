@@ -1,6 +1,6 @@
 # WeChat Article Image Skill
 
-这个 skill 用来写公众号文章，并为文章生成配图。当前版本的图片生成后端是 Agnes Image 2.1 Flash。
+这个 skill 用来写文章，并为文章生成配图。当前版本的图片生成后端是 Agnes Image 2.1 Flash。
 
 默认流程是：
 
