@@ -6,7 +6,7 @@ import argparse
 import json
 from pathlib import Path
 
-from style_asset_paths import grid_path, single_path
+from style_asset_paths import single_path
 
 SKILL = Path(__file__).resolve().parents[1]
 POLICY = SKILL / "references" / "model_capabilities.json"
@@ -32,8 +32,7 @@ def positive_traits(traits: str) -> str:
 
 
 def get_reference_path(number: str) -> str:
-    reference_grid = grid_path(number)
-    return str(reference_grid if reference_grid.exists() else single_path(number))
+    return str(single_path(number))
 
 
 def resolve(model: str, style: str, policy: dict | None = None) -> dict:

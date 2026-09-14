@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 from resolve_reference import resolve
-from style_asset_paths import bucket_name, grid_path, single_path
+from style_asset_paths import bucket_name, single_path
 
 SKILL = Path(__file__).resolve().parents[1]
 REFERENCES = SKILL / "references"
@@ -35,17 +35,26 @@ def main() -> None:
         fail(f"missing numbered image assets; first missing: {missing[0]}")
     gallery = (SKILL / "gallery" / "index.html").read_text(encoding="utf-8")
     sheets = sorted(IMAGES.glob("[A-G]_*.png"))
-    if not sheets or any(f"../assets/images/{path.name}" not in gallery for path in sheets):
-        fail("gallery does not reference every bundled contact sheet")
+    legacy_grids = sorted((IMAGES / "individual").rglob("*" + "_grid.jpg"))
+    if sheets or legacy_grids:
+        fail("duplicate legacy image assets remain")
+    expected_gallery_paths = [
+        f"../assets/images/individual/{bucket_name(number)}/{number}.png"
+        for number in expected
+    ]
+    if any(path not in gallery for path in expected_gallery_paths):
+        fail("gallery does not reference every numbered single image")
+    if gallery.count('class="style-card"') != len(styles):
+        fail("gallery must render one image card per style")
     if "E:\\" in (SKILL / "SKILL.md").read_text(encoding="utf-8"):
         fail("SKILL.md contains a machine-specific Windows path")
     unknown = resolve("unregistered-model", "217")
-    if not unknown["use_reference_image"] or unknown["reference_path"] != str(grid_path(217)):
-        fail("reference-image fallback did not resolve the bundled grid asset")
+    if not unknown["use_reference_image"] or unknown["reference_path"] != str(single_path(217)):
+        fail("reference-image fallback did not resolve the numbered single image")
     named = resolve("gpt-image-2", "001")
     if named["use_reference_image"]:
         fail("known name-activated style unexpectedly uses an image")
-    print(f"PASS: self-contained skill with {len(styles)} styles, {len(sheets)} contact sheets, and portable asset paths.")
+    print(f"PASS: self-contained skill with {len(styles)} single-image styles and portable asset paths.")
 
 
 if __name__ == "__main__":
