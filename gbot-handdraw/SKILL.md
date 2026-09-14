@@ -13,12 +13,12 @@ When the user explicitly requests image generation, first resolve the current im
 
 - `name_activation=strong`: first choice. Send only the indexed author name plus generated style name and theme; do not add core traits or pass a reference image.
 - If name activation is not strong but `traits_activation=strong` and the style has core traits, second choice. Add only positive, concrete visual traits to the author-name + style-name prompt and do not pass a reference image.
-- If neither author-name + style-name nor author-name + style-name + traits is strong, last choice. Pass the configured numbered single image through the image-generation tool's `referenced_image_paths` parameter. Assets live inside this skill under `assets/images/individual/` in numbered 200-style buckets; for example, #217 uses `assets/images/individual/201-400/217.png`.
+- If neither author-name + style-name nor author-name + style-name + traits is strong, last choice. Pass the configured numbered single image through the image-generation tool's `referenced_image_paths` parameter. Assets live inside this skill under `assets/images/individual/` in numbered 200-style buckets; for example, #217 uses `assets/images/individual/201-400/217.jpg`.
 - If the model identifier or its capability entry is unavailable, treat it as `unknown` and pass the image as the safe fallback.
 - Use `python scripts/resolve_reference.py --model <model> --style <number>` when a deterministic decision check is useful. The script prints JSON and never guesses an unknown model's capability.
 - The resolver reports `activation_source` as `name+style`, `name+style+traits`, or `reference-image`, plus the filtered `prompt_traits` when traits are used.
 
-- Resolve the style number relative to the directory containing this `SKILL.md`. Every style uses exactly one canonical image at `assets/images/individual/{bucket}/{number}.png` (for example, `048` maps to `assets/images/individual/001-200/048.png`). Pass the resolved absolute path to the image-generation tool.
+- Resolve the style number relative to the directory containing this `SKILL.md`. Every style uses exactly one canonical image at `assets/images/individual/{bucket}/{number}.jpg` (for example, `048` maps to `assets/images/individual/001-200/048.jpg`). Pass the resolved absolute path to the image-generation tool.
 - When an image is passed, inject the following reference-isolation block into the actual image-generation prompt. It is required for every reference-image generation and is not added to ordinary prompt-only output:
 
   Chinese: `所附图片仅用于参考画风。只提取参考图的风格特征，例如线条、笔触、媒介、材质、色彩倾向和整体视觉语言；不要使用、复制或延续参考图中的任何主体、人物、动物、服装、道具、动作、姿态、场景、背景、构图、布局、文字或故事。最终画面内容完全以用户提供的主题为准。`

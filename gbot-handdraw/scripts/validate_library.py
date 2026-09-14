@@ -30,6 +30,8 @@ def main() -> None:
         fail("style numbering is not continuous")
     if bucket_name(1) != "001-200" or bucket_name(217) != "201-400":
         fail("asset bucket calculation is incorrect")
+    if list((IMAGES / "individual").rglob("*.png")):
+        fail("legacy PNG reference images remain")
     missing = [str(single_path(number)) for number in expected if not single_path(number).exists()]
     if missing:
         fail(f"missing numbered image assets; first missing: {missing[0]}")
@@ -39,7 +41,7 @@ def main() -> None:
     if sheets or legacy_grids:
         fail("duplicate legacy image assets remain")
     expected_gallery_paths = [
-        f"../assets/images/individual/{bucket_name(number)}/{number}.png"
+        f"../assets/images/individual/{bucket_name(number)}/{number}.jpg"
         for number in expected
     ]
     if any(path not in gallery for path in expected_gallery_paths):

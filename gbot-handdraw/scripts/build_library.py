@@ -34,7 +34,7 @@ def parse_styles() -> list[dict[str, str]]:
 
 
 def image_uri(number: str) -> str:
-    return f"../assets/images/individual/{bucket_name(number)}/{number}.png"
+    return f"../assets/images/individual/{bucket_name(number)}/{number}.jpg"
 
 
 def gallery_html(styles: list[dict[str, str]]) -> str:
@@ -119,7 +119,7 @@ def main() -> None:
         raise SystemExit(f"Style source must contain exactly continuous 001–{len(styles):03} entries.")
     missing = [number for number in numbers if not single_path(number).exists()]
     if missing:
-        raise SystemExit(f"Missing numbered image: {missing[0]}.png")
+        raise SystemExit(f"Missing numbered image: {missing[0]}.jpg")
     STYLE_JSON.write_text(json.dumps(styles, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     GALLERY.parent.mkdir(parents=True, exist_ok=True)
     GALLERY.write_text(gallery_html(styles), encoding="utf-8")

@@ -16,4 +16,4 @@ def bucket_name(number: int | str) -> str:
 
 def single_path(number: int | str) -> Path:
     value = int(number)
-    return IMAGE_ROOT / bucket_name(value) / f"{value:03}.png"
+    return IMAGE_ROOT / bucket_name(value) / f"{value:03}.jpg"
