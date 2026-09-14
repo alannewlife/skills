@@ -48,6 +48,14 @@ def main() -> None:
         fail("gallery does not reference every numbered single image")
     if gallery.count('class="style-card"') != len(styles):
         fail("gallery must render one image card per style")
+    if f"手绘风格标本册 <i>· {len(styles)} 种风格</i>" not in gallery:
+        fail("gallery heading does not show the Arabic style count")
+    if any(label in gallery for label in ("风格名称：", "参考作者/风格名称：", "参考作者/主题：")):
+        fail("gallery prompt copy includes style or reference metadata")
+    if gallery.count("核心视觉特征：") != len(styles) * 2:
+        fail("every card must show and copy its core visual traits")
+    if gallery.count("主题：[请填写]") != len(styles) * 2:
+        fail("every card must show and copy a theme placeholder")
     if "E:\\" in (SKILL / "SKILL.md").read_text(encoding="utf-8"):
         fail("SKILL.md contains a machine-specific Windows path")
     unknown = resolve("unregistered-model", "217")
