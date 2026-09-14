@@ -45,10 +45,14 @@ def gallery_html(styles: list[dict[str, str]]) -> str:
         group = style["group"][0]
         title = html.escape(style["generation_name"])
         reference = html.escape(style["reference"])
-        traits = html.escape(style["traits"] or "以编号图片作为视觉参考")
+        trait_text = style["traits"] or "以编号图片作为视觉参考"
+        traits = html.escape(trait_text)
         path = image_uri(number)
         search = html.escape(f'{number} {style["generation_name"]} {style["reference"]} {style["traits"]}'.lower())
-        prompt = f"风格名称：#{number} · {style['generation_name']}。\n参考作者/风格名称：{style['reference']}。"
+        prompt = (f"风格名称：#{number} · {style['generation_name']}。\n"
+                  f"核心视觉特征：{trait_text}\n"
+                  f"参考作者/风格名称：{style['reference']}。\n"
+                  "主题：[请填写]")
         prompt_html = html.escape(prompt)
         cards_by_group[group].append(
             f'<article class="style-card" data-group="{group}" data-search="{search}">'
@@ -79,21 +83,21 @@ def gallery_html(styles: list[dict[str, str]]) -> str:
 :root{{--paper:#eee8da;--paper-light:#f8f4ea;--ink:#20221d;--muted:#777264;--vermillion:#c94d32;--moss:#687255;--line:#c9bfaa;--shadow:0 14px 35px #332c2016}}
 *{{box-sizing:border-box}}html{{scroll-behavior:smooth}}body{{margin:0;color:var(--ink);background:var(--paper);font-family:"Songti SC","STSong","Noto Serif CJK SC",Georgia,serif}}
 body:before{{content:"";position:fixed;inset:0;pointer-events:none;opacity:.3;background-image:radial-gradient(#61594818 .7px,transparent .7px);background-size:5px 5px;mix-blend-mode:multiply}}
-.masthead{{min-height:340px;padding:clamp(34px,7vw,86px) clamp(20px,6vw,90px) 40px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:36px;align-items:end;border-bottom:1px solid var(--line);background:linear-gradient(115deg,#f8f2e5 0 68%,#d8d1bb 68%)}}
-.eyebrow{{margin:0 0 18px;color:var(--vermillion);font:700 12px/1.2 ui-monospace,SFMono-Regular,monospace;letter-spacing:.18em;text-transform:uppercase}}h1{{max-width:850px;margin:0;font-size:clamp(45px,8vw,104px);font-weight:500;line-height:.9;letter-spacing:-.06em}}h1 i{{font-style:normal;color:var(--vermillion)}}
-.intro{{max-width:560px;margin:28px 0 0;font-size:clamp(16px,2vw,21px);line-height:1.65;color:#4f5048}}.edition{{writing-mode:vertical-rl;padding:16px 11px;border:1px solid var(--ink);font-size:13px;letter-spacing:.16em;background:#f8f4e9;box-shadow:7px 7px 0 var(--vermillion)}}
+.masthead{{min-height:220px;padding:30px clamp(20px,6vw,90px) 26px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:end;border-bottom:1px solid var(--line);background:linear-gradient(115deg,#f8f2e5 0 72%,#d8d1bb 72%)}}
+.eyebrow{{margin:0 0 10px;color:var(--vermillion);font:700 11px/1.2 ui-monospace,SFMono-Regular,monospace;letter-spacing:.16em;text-transform:uppercase}}h1{{max-width:850px;margin:0;font-size:clamp(36px,5vw,64px);font-weight:500;line-height:.92;letter-spacing:-.05em}}h1 br{{display:none}}h1 i{{font-style:normal;color:var(--vermillion)}}
+.intro{{max-width:680px;margin:14px 0 0;font-size:15px;line-height:1.55;color:#4f5048}}.edition{{writing-mode:vertical-rl;padding:12px 8px;border:1px solid var(--ink);font-size:11px;letter-spacing:.13em;background:#f8f4e9;box-shadow:5px 5px 0 var(--vermillion)}}
 .toolbar{{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:14px clamp(18px,5vw,70px);background:#eee8daf2;border-bottom:1px solid var(--line);backdrop-filter:blur(16px)}}
 .search{{position:relative;flex:1 1 300px}}.search input{{width:100%;height:44px;padding:0 42px 0 15px;border:1px solid var(--ink);border-radius:0;background:var(--paper-light);color:var(--ink);font:16px/1.2 inherit;outline:none}}.search input:focus{{box-shadow:4px 4px 0 var(--vermillion)}}.search span{{position:absolute;right:14px;top:11px;color:var(--muted)}}
 .filters{{display:flex;gap:5px}}.filters button,.density{{min-width:38px;height:38px;border:1px solid var(--line);background:transparent;color:var(--ink);font:700 13px/1 ui-monospace,SFMono-Regular,monospace;cursor:pointer}}.filters button:hover,.filters button.active,.density:hover{{color:#fff;background:var(--ink);border-color:var(--ink)}}
 .result-count{{margin-left:auto;color:var(--muted);font:12px/1 ui-monospace,SFMono-Regular,monospace}}
 main{{padding:0 clamp(18px,5vw,70px) 90px}}.collection{{padding:64px 0 22px;scroll-margin-top:74px}}.collection[hidden]{{display:none}}.chapter{{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;margin:0 0 34px;padding:0 0 18px;border-bottom:1px solid var(--ink)}}.chapter-letter{{display:grid;place-items:center;width:72px;height:72px;background:var(--ink);color:var(--paper-light);font:500 46px/1 Georgia,serif;box-shadow:7px 7px 0 var(--vermillion)}}.chapter p{{margin:0 0 5px;color:var(--vermillion);font:700 11px/1.2 ui-monospace,SFMono-Regular,monospace;letter-spacing:.13em}}.chapter h2{{margin:0;font-size:clamp(23px,3vw,38px);font-weight:500;letter-spacing:-.03em}}.gallery{{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:clamp(12px,1.6vw,22px)}}body.compact .gallery{{grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:10px}}
-.style-card{{min-width:0;transition:opacity .25s,transform .25s}}.style-card:nth-child(4n+1){{transform:rotate(-.35deg)}}.style-card:nth-child(4n+3){{transform:rotate(.35deg)}}.style-card:hover{{transform:translateY(-7px) rotate(0);z-index:1}}.style-card[hidden]{{display:none}}
-.style-card{{padding:8px 8px 12px;border:1px solid var(--line);background:var(--paper-light);box-shadow:var(--shadow)}}
+.style-card{{min-width:0;transition:border-color .2s,box-shadow .2s}}.style-card:hover{{border-color:#9b8d75;box-shadow:0 16px 32px #332c2022}}.style-card[hidden]{{display:none}}
+.style-card{{display:flex;flex-direction:column;height:520px;padding:8px 8px 12px;border:1px solid var(--line);background:var(--paper-light);box-shadow:var(--shadow)}}
 .image-wrap{{width:min(100%,171px);aspect-ratio:1;margin:0 auto;overflow:hidden;background:#ddd5c3;border:1px solid #b8ad98}}.image-wrap img{{width:100%;height:100%;display:block;object-fit:cover;filter:saturate(.93)}}
 .card-meta{{display:flex;justify-content:space-between;align-items:center;margin:10px 2px 7px}}.number{{color:var(--vermillion);font:800 12px/1 ui-monospace,SFMono-Regular,monospace}}.group{{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--moss);color:#fff;font:700 10px/1 ui-monospace,SFMono-Regular,monospace}}.style-card strong{{display:block;margin:0 2px;font-size:14px;line-height:1.28}}.style-card small{{display:block;margin:5px 2px 0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
-.prompt-text{{min-height:58px;margin:10px 2px 8px;padding-top:9px;border-top:1px dashed var(--line);white-space:pre-line;color:#5a574f;font:11px/1.5 "Songti SC","STSong",serif}}.copy{{width:100%;height:30px;border:1px solid var(--ink);background:transparent;color:var(--ink);font:700 11px/1 inherit;cursor:pointer}}.copy:hover,.copy.copied{{background:var(--ink);color:var(--paper-light)}}
+.prompt-text{{flex:1;min-height:0;overflow:auto;margin:10px 2px 8px;padding:9px 4px 0 0;border-top:1px dashed var(--line);white-space:pre-line;color:#5a574f;font:11px/1.55 "Songti SC","STSong",serif;scrollbar-width:thin}}.copy{{flex:0 0 auto;width:100%;height:30px;margin-top:auto;border:1px solid var(--ink);background:transparent;color:var(--ink);font:700 11px/1 inherit;cursor:pointer}}.copy:hover,.copy.copied{{background:var(--ink);color:var(--paper-light)}}
 .empty{{display:none;padding:80px 20px;text-align:center;color:var(--muted);font-size:20px}}.empty.show{{display:block}}
-@media(max-width:700px){{.masthead{{min-height:280px;grid-template-columns:1fr;background:#f8f2e5}}.edition{{display:none}}.toolbar{{position:relative}}.filters{{order:3;width:100%;overflow-x:auto}}.result-count{{margin-left:0}}.collection{{padding-top:46px}}.chapter{{gap:16px}}.chapter-letter{{width:56px;height:56px;font-size:34px;box-shadow:5px 5px 0 var(--vermillion)}}.gallery{{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}}}
+@media(max-width:700px){{.masthead{{min-height:190px;padding:24px 20px 22px;grid-template-columns:1fr;background:#f8f2e5}}.edition{{display:none}}h1{{font-size:40px}}.toolbar{{position:relative}}.filters{{order:3;width:100%;overflow-x:auto}}.result-count{{margin-left:0}}.collection{{padding-top:46px}}.chapter{{gap:16px}}.chapter-letter{{width:56px;height:56px;font-size:34px;box-shadow:5px 5px 0 var(--vermillion)}}.gallery{{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}}}
 @media(prefers-reduced-motion:reduce){{*{{scroll-behavior:auto!important;transition:none!important}}}}
 </style></head>
 <body><header class="masthead"><div><p class="eyebrow">Hand-drawn style field guide · {total} specimens</p><h1>手绘风格<br><i>标本册</i></h1><p class="intro">每一种画风都有自己的编号。搜索、筛选、查看提示词，然后把编号和你的主题交给 Skill。</p></div><div class="edition">零零一 — 二六一 · 离线版</div></header>
