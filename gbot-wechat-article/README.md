@@ -1,17 +1,17 @@
 # WeChat Article Image Skill
 
-这个 skill 用来写文章，并为文章生成配图。当前版本的图片生成后端是 Agnes Image 2.1 Flash。
+这个 skill 用来写文章，并为文章生成配图。当前版本的图片生成后端是 Agnes Image 2.5 Flash。
 
 默认流程是：
 
 1. 先写文章或整理文章。
 2. 如果用户没有明确说明，先用中文询问：配图是直接画出来，还是只提供图片提示词。
 3. 在合适位置插入配图提示词。
-4. 如果用户选择直接出图，默认用 Agnes Image 2.1 Flash 生成图片并插入 Markdown。
+4. 如果用户选择直接出图，默认用 Agnes Image 2.5 Flash 生成图片并插入 Markdown。
 5. 图片保存到当前工作目录的 `outputs/images/`。
 6. 文章保存为 Markdown。
 
-如果用户已经明确说“直接画出来”“生成图片”，就不再追问，默认用 Agnes Image 2.1 Flash 出图；如果用户明确说“只要提示词”“先不要生成图片”，就只输出文章和配图 Prompt。
+如果用户已经明确说“直接画出来”“生成图片”，就不再追问，默认用 Agnes Image 2.5 Flash 出图；如果用户明确说“只要提示词”“先不要生成图片”，就只输出文章和配图 Prompt。
 
 ## 重要：不要分享自己的 API Key
 
@@ -54,7 +54,7 @@ Agnes 官方快速开始文档：
 https://agnes-ai.com/zh-Hans/docs/quickstart
 ```
 
-Agnes Image 2.1 Flash 文档：
+Agnes 图片接口文档（原 2.1 Flash 页面；当前默认模型为 2.5 Flash）：
 
 ```text
 https://agnes-ai.com/zh-Hans/docs/agnes-image-21-flash
@@ -73,7 +73,7 @@ cp config/agnes.env.example config/agnes.env
 ```bash
 AGNES_API_KEY=把你的_Agnes_API_Key_放这里
 AGNES_BASE_URL=https://apihub.agnes-ai.com
-AGNES_IMAGE_MODEL=agnes-image-2.1-flash
+AGNES_IMAGE_MODEL=agnes-image-2.5-flash
 ```
 
 也可以不用配置文件，直接设置环境变量：

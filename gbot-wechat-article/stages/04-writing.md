@@ -215,7 +215,7 @@
 
 **6.1 先确认是否直接出图**
 
-如果用户已经明确要求“生成图片 / 开始画图 / 用 Agnes 出图 / 直接画出来”，不再追问；“直接画出来”默认就是用 Agnes Image 2.1 Flash 出图。
+如果用户已经明确要求“生成图片 / 开始画图 / 用 Agnes 出图 / 直接画出来”，不再追问；“直接画出来”默认就是用 Agnes Image 2.5 Flash 出图。
 
 如果用户已经明确要求“只要提示词 / 先不要生成图片 / 不要出图”，不再追问，只生成文章和配图提示词。
 
@@ -225,7 +225,7 @@
 这次配图要直接画出来，还是只提供图片提示词？
 
 你可以回复：
-1. 直接画出来：我会默认用 Agnes Image 2.1 Flash 生成图片并插入 Markdown。
+1. 直接画出来：我会默认用 Agnes Image 2.5 Flash 生成图片并插入 Markdown。
 2. 只提供提示词：我只写文章和配图 Prompt，不生成图片。
 ```
 
@@ -278,7 +278,7 @@ Agnes 对中文文字渲染不稳定。默认图片 Prompt 不要要求模型生
 - 风格基准：`image_templates/style-block.md`
 
 **用户选择直接出图后才执行：**
-- 使用 `scripts/generate_agnes_images.py` 调用 Agnes Image 2.1 Flash 逐张或批量生成。
+- 使用 `scripts/generate_agnes_images.py` 调用 Agnes Image 2.5 Flash 逐张或批量生成。
 - 不要把“直接画出来”解释为调用 GPT 图片模型或其他出图工具；除非用户明确要求临时 fallback，否则只使用 Agnes。
 - API key 从环境变量 `AGNES_API_KEY` 或 skill 目录下 `config/agnes.env` 读取；不要把真实 key 写进文章或提示词文件。
 - 不运行旧版 `scripts/generate_images.py`。

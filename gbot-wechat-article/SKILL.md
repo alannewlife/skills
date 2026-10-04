@@ -1,6 +1,6 @@
 ---
 name: gbot-wechat-article
-description: "公众号文章写作与 Agnes Image 2.1 Flash 配图工作流。用于写公众号、推文、微信文章、把访谈/转写稿整理成公众号文章，并生成封面图/正文信息图/结尾引导图提示词；如果用户没有明确说明是否出图，先用中文询问是直接生成图片还是只提供提示词。"
+description: "公众号文章写作与 Agnes Image 2.5 Flash 配图工作流。用于写公众号、推文、微信文章、把访谈/转写稿整理成公众号文章，并生成封面图/正文信息图/结尾引导图提示词；如果用户没有明确说明是否出图，先用中文询问是直接生成图片还是只提供提示词。"
 ---
 
 # 公众号文章 + Agnes 配图助手
@@ -11,18 +11,18 @@ description: "公众号文章写作与 Agnes Image 2.1 Flash 配图工作流。�
 - 写公众号文章、推文、微信文章；
 - 把访谈稿、视频转写稿、资料整理成公众号文章；
 - 先准备插图 Prompt 和插图位置；
-- 用 Agnes Image 2.1 Flash 生成公众号配图；
+- 用 Agnes Image 2.5 Flash 生成公众号配图；
 
 使用本 skill。
 
 ## 核心原则
 
 - 先写出可读的公众号文章，再处理配图。
-- 如果用户已经明确要求“生成图片/开始画图/用 Agnes 出图/直接画出来”，默认等同于“用 Agnes Image 2.1 Flash 出图”，按要求调用 Agnes 图片生成脚本，不再追问。
+- 如果用户已经明确要求“生成图片/开始画图/用 Agnes 出图/直接画出来”，默认等同于“用 Agnes Image 2.5 Flash 出图”，按要求调用 Agnes 图片生成脚本，不再追问。
 - 如果用户已经明确要求“只要提示词/先不要生成图片/不要出图”，只生成文章和配图提示词，不调用出图脚本。
 - 如果用户没有明确说明图片处理方式，在写文章前或最迟保存 Markdown 正文前先用中文询问：“这次配图要直接画出来，还是只提供图片提示词？”等用户选择后再继续。
 - 面向用户的确认问题、状态说明和交付说明都用中文；图片生成 Prompt 仍以英文为主，只描述画面。
-- 默认使用 `agnes-image-2.1-flash`，接口地址为 `https://apihub.agnes-ai.com/v1/images/generations`。
+- 默认使用 `agnes-image-2.5-flash`，接口地址为 `https://apihub.agnes-ai.com/v1/images/generations`。
 - API key 从环境变量 `AGNES_API_KEY` 或 `config/agnes.env` 读取；仓库里只保留占位，不写入真实 key。
 - 不再默认调用 GPT 图片模型；只有 Agnes 不可用且用户明确要求临时 fallback 时，才考虑当前环境里的 `image_gen`。
 - 输出默认保存到当前工作目录的 `outputs/`；如果用户指定路径，按用户路径保存。
@@ -40,7 +40,7 @@ export AGNES_API_KEY="你的 Agnes API Key"
 ```bash
 AGNES_API_KEY=YOUR_AGNES_API_KEY_HERE
 AGNES_BASE_URL=https://apihub.agnes-ai.com
-AGNES_IMAGE_MODEL=agnes-image-2.1-flash
+AGNES_IMAGE_MODEL=agnes-image-2.5-flash
 ```
 
 脚本位置：
@@ -108,7 +108,7 @@ python scripts/generate_agnes_images.py --help
 
 写文章前或最迟保存 Markdown 正文前，先判断用户是否已经指定配图处理方式：
 
-- 明确要直接出图：写文章、生成配图提示词，并在保存后默认调用 Agnes Image 2.1 Flash 出图。
+- 明确要直接出图：写文章、生成配图提示词，并在保存后默认调用 Agnes Image 2.5 Flash 出图。
 - 明确只要提示词：写文章、生成配图提示词，不调用出图脚本。
 - 未明确指定：先用中文提问，不要直接假设。
 
@@ -118,7 +118,7 @@ python scripts/generate_agnes_images.py --help
 这次配图要直接画出来，还是只提供图片提示词？
 
 你可以回复：
-1. 直接画出来：我会默认用 Agnes Image 2.1 Flash 生成图片并插入 Markdown。
+1. 直接画出来：我会默认用 Agnes Image 2.5 Flash 生成图片并插入 Markdown。
 2. 只提供提示词：我只写文章和配图 Prompt，不生成图片。
 ```
 
@@ -148,7 +148,7 @@ python scripts/generate_agnes_images.py --help
 - 结尾引导图：默认 `900x600`；只有需要公众号底部横幅时才用 `900x383`；
 - 不要把正文插图默认做成 `900x383` 的细长横幅。
 
-Prompt 要写给 Agnes Image 2.1 Flash：
+Prompt 要写给 Agnes Image 2.5 Flash：
 - 英文为主，只描述画面，不要求模型生成可读文字；
 - 明确尺寸，并按用途选择：封面 `900x383`，正文默认 `900x600`；
 - 明确风格：warm cream paper texture, colored pencil line art, light watercolor wash；
@@ -197,7 +197,7 @@ Prompt 要写给 Agnes Image 2.1 Flash：
 ### 7. 按用户选择生成图片
 
 只有在用户明确要求生成图片，或在第 4 步选择“直接画出来”时：
-- 默认调用 `scripts/generate_agnes_images.py`，用 Agnes Image 2.1 Flash 逐张或批量生成；
+- 默认调用 `scripts/generate_agnes_images.py`，用 Agnes Image 2.5 Flash 逐张或批量生成；
 - 不要把“直接画出来”解释为调用 GPT 图片模型或其他出图工具；除非用户明确要求临时 fallback，否则只使用 Agnes；
 - 默认以 Base64 返回并保存为本地 PNG，避免图片 URL 过期；
 - 脚本会按 `size` 自动后处理到精确像素尺寸；如需保留模型原始尺寸，传 `--resize-mode none`；
@@ -243,5 +243,5 @@ python scripts/generate_agnes_images.py \
 - 每个 Prompt 都包含尺寸、风格和负面约束；
 - 默认图片 Prompt 不要求渲染中文或任何可读文字，除非用户明确指定；
 - 没有真实 API key、`glm-image`、`cogview`、旧版 `generate_images.py` 调用；
-- 如果需要出图，使用 `generate_agnes_images.py`，模型为 `agnes-image-2.1-flash`；
+- 如果需要出图，使用 `generate_agnes_images.py`，模型为 `agnes-image-2.5-flash`；
 - 如果用户只是要 Prompt，不要生成图片。

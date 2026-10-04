@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate WeChat article images with Agnes Image 2.1 Flash."""
+"""Generate WeChat article images with Agnes Image 2.5 Flash."""
 
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ from typing import Any
 SKILL_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_ENV_FILE = SKILL_DIR / "config" / "agnes.env"
 DEFAULT_BASE_URL = "https://apihub.agnes-ai.com"
-DEFAULT_MODEL = "agnes-image-2.1-flash"
+DEFAULT_MODEL = "agnes-image-2.5-flash"
 PLACEHOLDER_KEYS = {
     "",
     "YOUR_AGNES_API_KEY_HERE",
@@ -240,7 +240,7 @@ def build_jobs(args: argparse.Namespace) -> list[dict[str, Any]]:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate images with Agnes Image 2.1 Flash.")
+    parser = argparse.ArgumentParser(description="Generate images with Agnes Image 2.5 Flash.")
     parser.add_argument("--prompt", help="Single image prompt.")
     parser.add_argument("--prompt-file", help="Text file containing one prompt.")
     parser.add_argument("--batch-json", help="JSON file, or Markdown file with fenced JSON prompt blocks.")

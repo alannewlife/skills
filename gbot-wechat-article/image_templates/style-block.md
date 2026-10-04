@@ -2,7 +2,7 @@
 
 ## 通用风格基准
 
-- **模型**: Agnes Image 2.1 Flash（通过 `scripts/generate_agnes_images.py` 调用，API key 放在环境变量 `AGNES_API_KEY` 或 `config/agnes.env`）
+- **模型**: Agnes Image 2.5 Flash（通过 `scripts/generate_agnes_images.py` 调用，API key 放在环境变量 `AGNES_API_KEY` 或 `config/agnes.env`）
 - **画幅尺寸策略**: 封面图使用 900×383；正文插图默认使用 900×600；概念卡片可用 900×900
 - **核心内容区**: 封面图核心内容放在中心约 383×383 像素范围内；正文图保持充足上下留白
 - **质感**: 奶油色纸张底（纸纹可见），彩铅线稿（笔触可见）+ 淡水彩上色（轻晕染）
