@@ -1,0 +1,4 @@
+interface:
+  display_name: Video Master
+  short_description: 把完整故事制作成可逐步确认的视频
+  default_prompt: 使用 Video Master，将我提供的完整故事制作成视频，先让我选择风格并确认分镜。

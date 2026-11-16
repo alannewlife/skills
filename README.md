@@ -2,12 +2,19 @@
 
 这里存放的是我整理和制作的一些 Skills。
 
-这些 skills 可以单独使用，也可以按内容生产链路组合使用。当前主要分成两类：
+这些 skills 可以单独使用，也可以按内容生产链路组合使用。当前主要分成三类：
 
 - 公众号文章写作、配图和 Markdown 展示发布（也可以用作长图和海报）
 - PPT 内容整理和 HTML 幻灯片生成
+- 已有故事内容的视频制作与分阶段审阅
 
 ## 当前 Skill 列表
+
+### 视频制作
+
+- [`video-master`](video-master/README.md)
+  - 将已经准备并确认好的故事或旁白制作成视频，在本地页面逐阶段审阅风格、分镜、动态样片、逐幕视频和成片。
+  - 使用前请先准备完整内容；仅有主题时，可先让助手协助整理并确认故事。还需安装 [Remotion Agent Skills](https://github.com/remotion-dev/skills)，具体步骤和运行依赖见 [Video Master 使用说明](video-master/README.md)。
 
 ### 文章与发布预览
 

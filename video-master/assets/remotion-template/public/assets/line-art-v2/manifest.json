@@ -1,0 +1,11 @@
+{
+  "style": "商务讲解线条插画；少量低饱和色块，避免细碎衣褶、材质与高光",
+  "origin": "绘图模型独立生成；未从旧图裁切",
+  "assets": [
+    {"id": "employee", "file": "employee.png", "width": 1448, "height": 1086, "role": "人工衔接，同一任务在多方之间切换", "grouping": "员工、手持文件与电脑为整体素材；文字另由代码叠加"},
+    {"id": "consultant", "file": "consultant.png", "width": 1254, "height": 1254, "role": "流程与方法", "grouping": "人物与持有的清单"},
+    {"id": "expert", "file": "expert.png", "width": 1254, "height": 1254, "role": "外部专家", "grouping": "人物与持有的书本"}
+  ],
+  "animation": "整体出场、轻微透视与前后分层；当前没有人物关节拆分",
+  "code_owned": ["任务标签", "分类标题", "消息与文件图标", "系统窗口", "关系连线", "流动点", "待办状态"]
+}

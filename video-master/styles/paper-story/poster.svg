@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#f2eadb"/><path fill="#e5d5bd" d="M0 393 960 314v226H0z"/><path fill="#c5d0bc" d="M0 438 960 367v173H0z"/>
+<rect x="74" y="63" width="236" height="151" rx="2" fill="#f9f4e9" transform="rotate(-4 74 63)"/><path d="M107 103h150M107 126h120M107 149h135" stroke="#bfae94" stroke-width="7" stroke-linecap="round"/>
+<circle cx="477" cy="230" r="59" fill="#d38a71"/><path d="M388 406c0-84 43-136 89-136 55 0 96 52 96 136" fill="#698f7c"/><path d="M451 220h3m38 0h3" stroke="#343a32" stroke-width="9" stroke-linecap="round"/><path d="M462 246q15 12 30 0" fill="none" stroke="#343a32" stroke-width="4" stroke-linecap="round"/>
+<rect x="635" y="107" width="214" height="158" fill="#eac484" transform="rotate(5 635 107)"/><circle cx="740" cy="182" r="38" fill="#f7e8bf"/><path d="M615 347q75-50 150 0t140 5" fill="none" stroke="#a06b52" stroke-width="7" stroke-linecap="round" stroke-dasharray="12 13"/>
+<text x="52" y="491" font-family="sans-serif" font-size="22" fill="#66594b" letter-spacing="3">PAPER STORY · CONCEPT</text>
+</svg>
