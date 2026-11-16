@@ -26,6 +26,11 @@ class WorkflowTests(unittest.TestCase):
     def tearDown(self):
         self.tmp.cleanup()
 
+    def test_typographic_motion_is_selectable(self):
+        state = workflow.read(self.project)
+        state = workflow.submit(self.project, "style", {"style_id": "typographic-motion"}, state["revision"], True)
+        self.assertEqual(state["active"], "styleframe")
+
     def test_confirm_requires_current_revision_and_artifacts(self):
         state = workflow.read(self.project)
         with self.assertRaises(workflow.Conflict):

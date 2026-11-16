@@ -135,7 +135,7 @@ def review_hashes(project, stage, data):
 
 def validate(project, stage, data, state):
     if data.get('processing'): raise Invalid('Codex 正在重新制作本阶段，请等待新版完成后再确认')
-    if stage == 'style' and data.get('style_id') not in ('business-line-art', 'paper-story'): raise Invalid('请选择一种风格')
+    if stage == 'style' and data.get('style_id') not in ('business-line-art', 'paper-story', 'typographic-motion'): raise Invalid('请选择一种风格')
     if stage != 'style' and str(data.get('notes', '')).strip(): raise Invalid('当前有待处理的修改意见，请先保存并让 Codex 处理')
     if stage == 'styleframe' and not safe_file(project, data.get('image')): raise Invalid('当前项目缺少风格试图，请等待 Codex 制作')
     if stage == 'storyboard':

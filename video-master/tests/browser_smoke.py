@@ -18,7 +18,10 @@ with tempfile.TemporaryDirectory() as tmp:
         page.goto(url,wait_until='networkidle')
         assert page.locator('.bottombar #save').count()==0
         assert page.locator('#style-notes').locator('..').locator('#save').inner_text()=='修改实施'
-        page.locator('[data-style="paper-story"]').click();page.locator('#style-notes').fill('使用浅绿色');page.locator('#remove-logo').click()
+        assert page.locator('[data-style="paper-story"]').count()==0
+        assert page.locator('.style-card').count()==2
+        assert all(page.locator('.preview').nth(i).evaluate("e => getComputedStyle(e).objectFit") == "contain" for i in range(2))
+        page.locator('[data-style="typographic-motion"]').click();page.locator('#style-notes').fill('使用浅绿色');page.locator('#remove-logo').click()
         page.wait_for_timeout(400);assert workflow.read(project)['brand']['logo'] is None
         assert page.locator('#style-notes').input_value()=='使用浅绿色'
         revision=workflow.read(project)['revision']
