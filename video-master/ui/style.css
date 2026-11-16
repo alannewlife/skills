@@ -50,3 +50,6 @@
 .done-file{gap:2px;flex:1 1 200px}
 .done-file code{font-size:11px}
 @media(max-width:600px){.content:has(.done-screen){padding-top:20px}.done-intro{align-items:flex-start;flex-direction:column;gap:4px}.done-video{width:100%;max-height:none}.done-actions{align-items:stretch}.done-download,.done-copy{width:auto;flex:1 1 135px}.done-file{flex-basis:100%}}
+
+/* Header actions retain their text labels while making each destination recognizable. */
+.top-actions{display:flex;align-items:center;gap:12px}.top-actions .ghost{display:inline-flex;align-items:center;gap:7px;padding:8px 10px;border-radius:7px;white-space:nowrap;transition:background .2s,color .2s}.top-actions .ghost:hover{background:#e8efe6;color:#1c5b4c}.top-actions .ghost span{padding-left:2px}.action-icon{width:17px;height:17px;flex:none;color:#39725e}@media(max-width:600px){.top-actions{gap:2px}.top-actions .ghost{gap:5px;padding:8px 5px}.action-icon{width:15px;height:15px}}
