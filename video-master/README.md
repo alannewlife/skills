@@ -12,22 +12,28 @@
    ```
 
    按提示选择使用的助手和 Skill。Remotion Skill 是给助手阅读的制作规范，不等同于项目的 Remotion 代码依赖；实际视频项目仍需要安装相应的 npm 依赖。
-3. **准备本地环境与制作工具。** 需要 Python 3、Node.js/npm、本地浏览器和可用的 AI 编程助手。内置 Remotion 模板声明的 Node.js 版本为 `^20.19.0 || ^22.13.0 || >=24`；安装模板依赖可在其项目目录运行 `npm install`。生成风格图和分镜需要可用的图片生成工具；编码、拼接和抽取视频帧通常需要 FFmpeg 或等效工具。工具是否可用取决于实际运行环境。
-4. **准备配音方式。** 动态样片会推荐使用小米 MiMo，也可以选择其他配音服务。在页面的「配音设置」中私密配置自己的 Key；没有配置或服务不可用时，先配置或明确选择其他方案，助手不应悄悄换声音。请勿把 Key 发到聊天里或提交到仓库。
+3. **准备制作工具。** 需要可用的 AI 编程助手和本地浏览器。助手会根据需要处理本地环境和依赖；Remotion 项目需要 Node.js/npm，生成风格图和分镜需要可用的图片生成工具，视频编码、拼接和抽帧通常需要 FFmpeg 或等效工具。工具是否可用取决于实际运行环境。
+4. **准备配音方式。** 默认推荐使用小米 MiMo，也可以明确选择其他配音服务。使用 MiMo 时：
+
+   1. 登录 [小米 MiMo 开放平台](https://platform.xiaomimimo.com/)，在控制台的 API Keys 中创建自己的 Key，并确认服务权限和额度。
+   2. 启动 Video Master 审阅页面后，点击右上角「配音设置」，将 Key 粘贴进去并保存。macOS 使用系统钥匙串，Windows 使用系统凭据管理器；其他系统可通过启动进程的 `MIMO_API_KEY` 环境变量配置。
+   3. 告诉助手使用 MiMo 配音及希望的音色；内置配音脚本使用 `mimo-v2.5-tts` 模型，实际调用以服务权限和可用情况为准。保存成功只表示凭据已配置，实际合成时才会验证服务连接和权限。
+
+   如果没有配置或服务不可用，先配置好，或明确告诉助手改用其他服务；助手不应悄悄替换声音。请勿把 Key 发到聊天里或提交到仓库。
 
 ## 安装 Video Master
 
-将本目录完整复制到使用的助手能发现 Skill 的目录。例如 Codex 的个人 Skill 目录：
+把下面的地址发给你的 Agent，请它安装 Video Master Skill：
 
-```bash
-git clone https://github.com/alannewlife/skills.git
-mkdir -p ~/.codex/skills
-cp -R skills/video-master ~/.codex/skills/video-master
+```text
+请安装这个 Skill：https://github.com/alannewlife/skills/tree/main/video-master
 ```
 
-如果目标目录已存在，请先检查并备份现有版本，避免覆盖自己的修改。安装后在新会话中使用 `video-master`，或直接告诉助手要用 Video Master 把准备好的故事制作成视频。其他助手请按其 Skill 安装方式放置完整目录。
+Agent 会按所用工具的方式安装完整 Skill；如果本机已有同名版本，请让它先检查并保留已有修改。安装后可在新会话中使用 `video-master`，或直接告诉助手要用 Video Master 把准备好的故事制作成视频。
 
 ## 怎么使用
+
+![Video Master 本地审阅界面：选择视觉风格](docs/review-interface.png)
 
 先把故事或旁白保存为 UTF-8 文本或 Markdown 文件，然后向助手说明，例如：
 
@@ -53,6 +59,7 @@ cp -R skills/video-master ~/.codex/skills/video-master
 - `scripts/`、`ui/`：项目状态、本地审阅服务、页面和配音辅助脚本。
 - `references/`：制作约定和项目、审阅协议。
 - `styles/`、`assets/`：风格参考和 Remotion 示例模板。
+- `docs/`：使用说明中的界面截图。
 
 内置模板与风格参考含示例品牌标识和示例音频，仅用于展示和启动流程。项目可在风格页面替换或移除默认 Logo；正式制作时应根据项目替换或移除示例素材。用户的视频项目、原始资料、成片和凭据不包含在此 Skill 中。
 
